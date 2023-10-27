@@ -1,4 +1,4 @@
-package com.example.practica;
+package com.example.practica.models;
 
 public class Libro {
     public String nombre, editorial;

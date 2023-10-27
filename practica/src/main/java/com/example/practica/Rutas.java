@@ -1,14 +1,19 @@
 package com.example.practica;
 
+import com.example.practica.models.Libro;
+import com.example.practica.models.Producto;
+import com.example.practica.services.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController //define rutas
 public class Rutas {
+    private OrderService orderService = new OrderService();
     private Logger logger = LoggerFactory.getLogger(PracticaApplication.class);
     @GetMapping("/get")//dentro del parentesis se define el nombre de la ruta
     String miPrimerGet (){
@@ -50,4 +55,16 @@ public class Rutas {
     String verStatus(){
         return "Libro guardado";
     }
+
+    @PostMapping("/order")//Recibe json
+   /* JSON ingresado en postman
+    [
+        {"nombre": "Pantalla LCD","precio": 100},
+        {"nombre": "Radio","precio": 50}
+    ]*/
+    String createOrder(@RequestBody List<Producto> products){
+        orderService.saveOrder(products);
+        return "Productos guardados";
+    }
+
 }
