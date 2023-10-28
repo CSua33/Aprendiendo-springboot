@@ -13,7 +13,13 @@ import java.util.Map;
 
 @RestController //define rutas
 public class Rutas {
-    private OrderService orderService = new OrderService();
+    //private OrderService orderService = new OrderService();
+    private OrderService orderService;
+
+    public Rutas(OrderService orderService) {//para inyeccion de dependencias, se agregó @Service
+        this.orderService = orderService;
+    }
+
     private Logger logger = LoggerFactory.getLogger(PracticaApplication.class);
     @GetMapping("/get")//dentro del parentesis se define el nombre de la ruta
     String miPrimerGet (){
